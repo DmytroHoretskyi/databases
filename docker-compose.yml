@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+
+  javad:
+    image: javad
+    container_name: javad
+    restart: always
+    ports:
+      - 9188:9188
+    depends_on:
+      - db
